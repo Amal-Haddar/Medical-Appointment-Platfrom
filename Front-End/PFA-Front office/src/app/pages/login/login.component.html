@@ -1,0 +1,174 @@
+<div class="header bg-gradient-danger py-7 py-lg-8">
+  <div class="container">
+    <div class="header-body text-center mb-7">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">« RESERVI TBIBEK »</h1>
+          <p style="color: yellow;">
+            Avec ce portail, vous allez pourvoir prendre des rendez-vous
+            médicale dans quelques cliques !
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg
+      x="0"
+      y="0"
+      viewBox="0 0 2560 100"
+      preserveAspectRatio="none"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="container mt--8 pb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-header bg-transparent pb-5">
+          <div class="card-header bg-transparent pb-5">
+            <div class="text-muted text-center mt-2 mb-3">
+              <small>Se connecter avec</small>
+            </div>
+            <div class="btn-wrapper text-center">
+              <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+                <span class="btn-inner--icon"
+                  ><img src="../assets/img/icons/common/github.svg"
+                /></span>
+                <span class="btn-inner--text">Github</span>
+              </a>
+              <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+                <span class="btn-inner--icon"
+                  ><img src="../assets/img/icons/common/google.svg"
+                /></span>
+                <span class="btn-inner--text">Google</span>
+              </a>
+            </div>
+          </div>
+          <div class="card-body px-lg-5 py-lg-5">
+            <div class="text-center text-muted mb-4">
+              <small>Ou connectez-vous avec vos identifiants </small>
+            </div>
+
+            <form
+              *ngIf="!isLoggedIn"
+              name="form"
+              (ngSubmit)="f.form.valid && onSubmit()"
+              #f="ngForm"
+              novalidate
+            >
+              <div class="form-group">
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i class="ni ni-single-02"></i
+                      ></span>
+                    </div>
+
+                    <input
+                      placeholder="Nom d'utilisateur"
+                      type="text"
+                      class="form-control"
+                      name="username"
+                      [(ngModel)]="form.username"
+                      required
+                      #username="ngModel"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  *ngIf="f.submitted && username.invalid"
+                >
+                  Le nom d'utilisateur est obligatoire!
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="ni ni-lock-circle-open"></i
+                    ></span>
+                  </div>
+
+                  <input
+                    placeholder="Mot de passe"
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    [(ngModel)]="form.password"
+                    required
+                    minlength="6"
+                    #password="ngModel"
+                  />
+                </div>
+              </div>
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="f.submitted && password.invalid"
+              >
+                <div *ngIf="password.errors.required">
+                  Le mot de passe est obligatoire
+                </div>
+                <div *ngIf="password.errors.minlength">
+                  Le mot de passe doit contenir au moins 6 caractéres
+                </div>
+              </div>
+              <div
+                class="custom-control custom-control-alternative custom-checkbox"
+              >
+                <input
+                  class="custom-control-input"
+                  id=" customCheckLogin"
+                  type="checkbox"
+                />
+                <label class="custom-control-label" for=" customCheckLogin">
+                  <span class="text-muted">Se rappeler de moi</span>
+                </label>
+              </div>
+              <div class="text-center">
+                <button class="btn btn-primary my-4">
+                  Login
+                </button>
+              </div>
+              <div class="form-group">
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  *ngIf="f.submitted && isLoginFailed"
+                >
+                  Échec de la connexion: {{ errorMessage }}
+                </div>
+              </div>
+            </form>
+
+            <div class="alert alert-success" *ngIf="isLoggedIn">
+              Connecté en tant que {{ roles }}.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-6">
+          <a href="javascript:void(0)" class="text-light"
+            ><small>Mot de passe oublié?</small></a
+          >
+        </div>
+        <div class="col-6 text-right">
+          <a href="javascript:void(0)" class="text-light"
+            ><small>Créer un nouveau compte</small></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

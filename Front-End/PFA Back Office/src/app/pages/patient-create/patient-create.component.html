@@ -1,0 +1,279 @@
+<div
+  class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="
+    min-height: 400px;
+    background-image: url(assets/img/theme/profile-cover.jpg);
+    background-size: cover;
+    background-position: center top;
+  "
+>
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="col-lg-7 col-md-10">
+      <h1 class="display-2 text-white">Ajouter patient</h1>
+      <button type="button" class="btn btn-info" (click)="list()">
+        Revenir à la liste des patients
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-12 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Formulaire d'ajout patient</h3>
+            </div>
+          </div>
+        </div>
+        <div>
+          <form>
+            <div class="card-body">
+              <form
+                *ngIf="!isSuccessful"
+                name="form"
+                (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm"
+                novalidate
+              >
+                <h6 class="heading-small text-muted mb-4">
+                  Informations personnelles
+                </h6>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label" for="name">Nom</label>
+                      <div>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="nom"
+                          [(ngModel)]="form.nom"
+                          required
+                          minlength="3"
+                          maxlength="20"
+                          #nom="ngModel"
+                        />
+                      </div>
+                      <div
+                        class="alert-danger"
+                        *ngIf="f.submitted && nom.invalid"
+                      >
+                        <div *ngIf="nom.errors.required">
+                          Le nom est obligatoire
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label" for="name"
+                        >Prenom</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="prenom"
+                        [(ngModel)]="form.prenom"
+                        required
+                        #prenom="ngModel"
+                      />
+                      <div
+                        class="alert-danger"
+                        *ngIf="f.submitted && prenom.invalid"
+                      >
+                        <div *ngIf="prenom.errors.required">
+                          Le prenom est obligatoire
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label" for="name"
+                        >Date de naissance</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        name="dateNaissance"
+                        [(ngModel)]="form.dateNaissance"
+                        required
+                        #dateNaissance="ngModel"
+                      />
+                      <div
+                        class="alert-danger"
+                        *ngIf="f.submitted && dateNaissance.invalid"
+                      >
+                        <div *ngIf="dateNaissance.errors.required">
+                          La date de naissance est obligatoire
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <!-- Compte -->
+                <h6 class="heading-small text-muted mb-4">
+                  Informations compte
+                </h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="name"
+                          >Nom d'utilisateur</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="username"
+                          [(ngModel)]="form.username"
+                          required
+                          minlength="3"
+                          maxlength="20"
+                          #username="ngModel"
+                        />
+                        <div
+                          class="alert-danger"
+                          *ngIf="f.submitted && username.invalid"
+                        >
+                          <div *ngIf="username.errors.required">
+                            Le nom d'utilisateur est obligatoire
+                          </div>
+                          <div *ngIf="username.errors.minlength">
+                            Le nom d'utilisateur doit avoir au mois 3 caractéres
+                          </div>
+                          <div *ngIf="username.errors.maxlength">
+                            Le nom d'utilisateur doit avoir au maximum 20
+                            caractéres
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="name"
+                          >Mot de passe</label
+                        >
+                        <input
+                          type="password"
+                          class="form-control"
+                          name="password"
+                          [(ngModel)]="form.password"
+                          required
+                          minlength="6"
+                          #password="ngModel"
+                        />
+                        <div
+                          class="alert-danger"
+                          *ngIf="f.submitted && password.invalid"
+                        >
+                          <div *ngIf="password.errors.required">
+                            Le mot de passe est obligatoire
+                          </div>
+                          <div *ngIf="password.errors.minlength">
+                            Le mot de passe doit avoir au moins 6 caractéres
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">
+                  Contacts
+                </h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="name"
+                          >Email</label
+                        >
+                        <input
+                          type="email"
+                          class="form-control"
+                          name="email"
+                          [(ngModel)]="form.email"
+                          required
+                          email
+                          #email="ngModel"
+                        />
+                        <div
+                          class="alert-danger"
+                          *ngIf="f.submitted && email.invalid"
+                        >
+                          <div *ngIf="email.errors.required">
+                            L'Email est obligatoire
+                          </div>
+                          <div *ngIf="email.errors.email">
+                            L'Email doit être une adresse email valide
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="name"
+                          >Teléphone</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          name="tel"
+                          [(ngModel)]="form.tel"
+                          required
+                          #tel="ngModel"
+                        />
+                        <div
+                          class="alert-danger"
+                          *ngIf="f.submitted && tel.invalid"
+                        >
+                          <div *ngIf="tel.errors.required">
+                            Le numéro du téléphone est obligatoire
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary btn-block">Ajouter</button>
+                </div>
+
+                <div
+                  class="alert alert-warning"
+                  *ngIf="f.submitted && isSignUpFailed"
+                >
+                  L'ajout a échoué!<br />{{ errorMessage }}
+                </div>
+                <!-- Description -->
+              </form>
+            </div>
+            <!--  <button
+              type="submit"
+              class="btn btn-success"
+              style="width: 200px; margin-left: 820px; margin-top: 10px;"
+            >
+              Ajouter
+            </button> -->
+          </form>
+        </div>
+        <div class="alert alert-success" *ngIf="isSuccessful">
+          L'ajout est réussie!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,488 @@
+<div
+  class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="
+    min-height: 400px;
+    background-image: url(assets/img/theme/profile-cover.jpg);
+    background-size: cover;
+    background-position: center top;
+  "
+>
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="col-lg-7 col-md-10">
+      <h1 class="display-2 text-white">Ajouter medecin</h1>
+      <button type="button" class="btn btn-info" (click)="list()">
+        Revenir à la liste des medecins
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+      <div class="card card-profile shadow">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2">
+            <div class="card-profile-image">
+              <a href="javascript:void(0)">
+                <img [src]="url" class="rounded-circle" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          <div class="d-flex justify-content-between">
+            <input
+              type="file"
+              (change)="onselectFile($event)"
+              class="btn btn-sm btn-default"
+              style="margin-top: 100px;"
+              id="photo"
+              required
+              [(ngModel)]="medecin.photo"
+              name="photo"
+            />
+            <!--  <a
+              href="javascript:void(0)"
+              class="btn btn-sm btn-default float-right"
+              >Ajouter</a
+            > -->
+          </div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+          <div class="row">
+            <div class="col">
+              <div
+                class="card-profile-stats d-flex justify-content-center mt-md-5"
+              ></div>
+            </div>
+          </div>
+          <div class="text-center">
+            <h3>
+              {{ medecin.nom
+              }}<span class="font-weight-light">,{{ medecin.prenom }}</span>
+            </h3>
+            <div class="h5 font-weight-300"></div>
+            <div class="h5 mt-4">
+              <i class="ni business_briefcase-24 mr-2"></i
+              >{{ medecin.specialite }}
+            </div>
+            <div>
+              <i class="ni education_hat mr-2"></i>Université de Medecine de
+              Tunis
+            </div>
+            <hr class="my-4" />
+            <p>
+              Santé, premier des biens après la paix du coeur.
+            </p>
+            <a href="javascript:void(0)">Henri-Frédéric Amiel </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Formulaire d'ajout medecin</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <form
+            *ngIf="!isSuccessful"
+            name="form"
+            (ngSubmit)="f.form.valid && onSubmit()"
+            #f="ngForm"
+            novalidate
+          >
+            <h6 class="heading-small text-muted mb-4">
+              Informations personnelles
+            </h6>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="name">Nom</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="nom"
+                      [(ngModel)]="form.nom"
+                      required
+                      minlength="3"
+                      maxlength="20"
+                      #nom="ngModel"
+                    />
+                  </div>
+                  <div class="alert-danger" *ngIf="f.submitted && nom.invalid">
+                    <div *ngIf="nom.errors.required">
+                      Le nom est obligatoire
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <label class="form-control-label" for="name">Prenom</label>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="prenom"
+                      [(ngModel)]="form.prenom"
+                      required
+                      #prenom="ngModel"
+                    />
+                  </div>
+
+                  <div
+                    class="alert-danger"
+                    *ngIf="f.submitted && prenom.invalid"
+                  >
+                    <div *ngIf="prenom.errors.required">
+                      Le prenom est obligatoire
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="name">Cin</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="cin"
+                      [(ngModel)]="form.cin"
+                      required
+                      length="8"
+                      #cin="ngModel"
+                    />
+                  </div>
+                  <div class="alert-danger" *ngIf="f.submitted && cin.invalid">
+                    <div *ngIf="cin.errors.required">
+                      La cin est obligatoire
+                    </div>
+                    <div *ngIf="cin.errors.length">
+                      La cin doit avoir 8 chiffres
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <label class="form-control-label" for="name">Spécialité</label>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative mb-3">
+                    <select
+                      type="text"
+                      class="form-control"
+                      id="specialite"
+                      required
+                      [(ngModel)]="form.specialite"
+                      name="specialite"
+                      style="overflow: scroll;"
+                      #specialite="ngModel"
+                    >
+                      <option [ngValue]="null" [disabled]="true">
+                        <i class="ni ni-pin-3">Specialité</i></option
+                      >
+
+                      <option value="Cardiologue">Cardiologue</option>
+                      <option value="Chirurgien Esthétique"
+                        >Chirurgien Esthétique</option
+                      >
+                      <option value="Dentiste">Dentiste</option>
+                      <option value="Dermatologue">Dermatologue</option>
+                      <option value="Endocrinlogue Diabétologue"
+                        >Endocrinlogue Diabétologue</option
+                      >
+                      <option value="Gastro-entérologue"
+                        >Gastro-entérologue</option
+                      >
+                      <option value="Géneraliste">Géneraliste</option>
+                      <option value="Gynécologue Obstétricien"
+                        >Gynécologue Obstétricien</option
+                      >
+                      <option value="Interniste">Interniste</option>
+                      <option value="Néphrologue">Néphrologue</option>
+                      <option value="Neurologue">Neurologue</option>
+                      <option value="Nutritionniste">Nutritionniste</option>
+                      <option value="Ophtalamogue">Ophtalamogue</option>
+                      <option value="Oto-Rhino-Laryngologiste"
+                        >Oto-Rhino-Laryngologiste</option
+                      >
+                      <option value="Pédiatre">Pédiatre</option>
+                      <option value="Pneumologue">Pneumologue</option>
+                      <option value="Psychiatre">Psychiatre</option>
+                      <option value="Psychothérapeute">Psychothérapeute</option>
+                      <option value="Radiologue">Radiologue</option>
+                      <option value="Rhumatologue">Rhumatologue</option>
+                      <option value="Sexologue">Sexologue</option>
+                      <option value="Urologue">Urologue</option>
+                    </select>
+                  </div>
+
+                  <div
+                    class="alert-danger"
+                    *ngIf="f.submitted && specialite.invalid"
+                  >
+                    <div *ngIf="specialite.errors.required">
+                      La specialité est obligatoire
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Compte -->
+            <h6 class="heading-small text-muted mb-4">
+              Informations compte
+            </h6>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="name"
+                    >Nom d'utilisateur</label
+                  >
+                  <div class="input-group input-group-alternative mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="username"
+                      [(ngModel)]="form.username"
+                      required
+                      minlength="3"
+                      maxlength="20"
+                      #username="ngModel"
+                    />
+                  </div>
+                  <div
+                    class="alert-danger"
+                    *ngIf="f.submitted && username.invalid"
+                  >
+                    <div *ngIf="username.errors.required">
+                      Le nom d'utilisateur est obligatoire
+                    </div>
+                    <div *ngIf="username.errors.minlength">
+                      Le nom d'utilisateur doit avoir au mois 3 caractéres
+                    </div>
+                    <div *ngIf="username.errors.maxlength">
+                      Le nom d'utilisateur doit avoir au maximum 20 caractéres
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="name"
+                    >Mot de passe</label
+                  >
+                  <div class="input-group input-group-alternative mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      name="password"
+                      [(ngModel)]="form.password"
+                      required
+                      minlength="6"
+                      #password="ngModel"
+                    />
+                  </div>
+                  <div
+                    class="alert-danger"
+                    *ngIf="f.submitted && password.invalid"
+                  >
+                    <div *ngIf="password.errors.required">
+                      Le mot de passe est obligatoire
+                    </div>
+                    <div *ngIf="password.errors.minlength">
+                      Le mot de passe doit avoir au moins 6 caractéres
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Informations cabinet -->
+            <h6 class="heading-small text-muted mb-4">
+              Informations cabinet
+            </h6>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="name">Adresse</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <select
+                      type="text"
+                      class="form-control"
+                      id="adresse"
+                      required
+                      [(ngModel)]="form.adresse"
+                      name="adresse"
+                      style="overflow: scroll;"
+                      #adresse="ngModel"
+                    >
+                      <option [ngValue]="null" [disabled]="true">
+                        <i class="ni ni-pin-3">Ville</i></option
+                      >
+                      <option value="Tunis">Tunis</option>
+                      <option value="BenArous">Ben arous</option>
+                      <option value="Bizerte">Bizerte</option>
+                      <option value="Bizerte">Beja</option>
+                      <option value="zahra">Zahra</option>
+                      <option value="rades">Rades</option>
+                      <option value="zaghouan">Zaghouan</option>
+                      <option value="kef">Kef</option>
+                      <option value="Sfax">Sfax</option>
+                      <option value="Sousse">Sousse</option>
+                      <option value="Monastir">Monastir</option>
+                      <option value="Ariana">Ariana</option>
+                      <option value="Manouba">Manouba</option>
+                      <option value="Kairouan">Kairouan</option>
+                      <option value="Jendouba">Jendouba</option>
+                      <option value="Gafsa">Gafsa</option>
+                      <option value="Gabes">Gabes</option>
+                      <option value="Siliana">Siliana</option>
+                      <option value="Kebili">Kebili</option>
+                      <option value="Tataouine">Tataouine</option>
+                      <option value="Djerba">Djerba</option>
+                      <option value="SidiBouzid">Sidi Bouzid</option>
+                      <option value="Nabeul">Nabeul</option>
+                      <option value="Mahdia">Mahdia</option>
+                    </select>
+                  </div>
+                  <div
+                    class="alert-danger"
+                    *ngIf="f.submitted && adresse.invalid"
+                  >
+                    <div *ngIf="adresse.errors.required">
+                      L'adresse est obligatoire
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="name"
+                    >Prix visite</label
+                  >
+                  <div class="input-group input-group-alternative mb-3">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="prixVisite"
+                      [(ngModel)]="form.prixVisite"
+                      required
+                      #prixVisite="ngModel"
+                    />
+                  </div>
+                  <div
+                    class="alert-danger"
+                    *ngIf="f.submitted && prixVisite.invalid"
+                  >
+                    <div *ngIf="prixVisite.errors.required">
+                      Le prix de la visite est obligatoire
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Address -->
+            <h6 class="heading-small text-muted mb-4">
+              Contacts
+            </h6>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="name">Email</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      [(ngModel)]="form.email"
+                      required
+                      email
+                      #email="ngModel"
+                    />
+                  </div>
+                  <div
+                    class="alert-danger"
+                    *ngIf="f.submitted && email.invalid"
+                  >
+                    <div *ngIf="email.errors.required">
+                      L'Email est obligatoire
+                    </div>
+                    <div *ngIf="email.errors.email">
+                      L'Email doit être une adresse email valide
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="name">Téléphone</label>
+                  <div class="input-group input-group-alternative mb-3">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="tel"
+                      [(ngModel)]="form.tel"
+                      required
+                      #tel="ngModel"
+                    />
+                  </div>
+                  <div class="alert-danger" *ngIf="f.submitted && tel.invalid">
+                    <div *ngIf="tel.errors.required">
+                      Le numéro du téléphone est obligatoire
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 9dimmm-->
+
+            <div class="form-group">
+              <button class="btn btn-primary btn-block">Ajouter</button>
+            </div>
+
+            <div
+              class="alert alert-warning"
+              *ngIf="f.submitted && isSignUpFailed"
+            >
+              L'ajout a échoué!<br />{{ errorMessage }}
+            </div>
+          </form>
+        </div>
+        <div class="alert alert-success" *ngIf="isSuccessful">
+          L'ajout est réussie!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

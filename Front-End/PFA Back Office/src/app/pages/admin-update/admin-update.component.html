@@ -1,0 +1,202 @@
+<div
+  class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="
+    min-height: 400px;
+    background-image: url(assets/img/theme/profile-cover.jpg);
+    background-size: cover;
+    background-position: center top;
+  "
+>
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center" *ngIf="admin">
+    <div class="col-lg-10 col-md-10">
+      <h3 class="display-2 text-white">Modifier mon profil ADMIN</h3>
+      <p class="text mt-0 mb-5" style="color: yellow;">
+        {{ admin.nom }} {{ admin.prenom }}
+      </p>
+      <button type="button" class="btn btn-info" (click)="gotoProfile()">
+        Revenir au profile
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7" *ngIf="admin">
+  <div class="row">
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+      <div class="card card-profile shadow">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2">
+            <div class="card-profile-image">
+              <a href="javascript:void(0)">
+                <img
+                  src="assets/img/theme/team-4-800x800.jpg"
+                  class="rounded-circle"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          <div class="d-flex justify-content-between">
+            <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4"
+              >Connect</a
+            >
+            <a
+              href="javascript:void(0)"
+              class="btn btn-sm btn-default float-right"
+              >Message</a
+            >
+          </div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+          <div class="row">
+            <div class="col">
+              <div
+                class="card-profile-stats d-flex justify-content-center mt-md-5"
+              ></div>
+            </div>
+          </div>
+          <div class="text-center">
+            <h3>
+              {{ admin.nom
+              }}<span class="font-weight-light">,{{ admin.prenom }}</span>
+            </h3>
+            <div class="h5 font-weight-300"></div>
+
+            <hr class="my-4" />
+            <p>
+              Santé, premier des biens après la paix du coeur.
+            </p>
+            <a href="javascript:void(0)">Henri-Frédéric Amiel </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Informations medecin</h3>
+            </div>
+          </div>
+        </div>
+        <div [hidden]="submitted">
+          <form *ngIf="!showMsg" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+              <form>
+                <h6 class="heading-small text-muted mb-4">
+                  Informations personnelles
+                </h6>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="name">Nom</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="nom"
+                        required
+                        [(ngModel)]="admin.nom"
+                        name="nom"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="name"
+                        >Prenom</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="prenom"
+                        required
+                        [(ngModel)]="admin.prenom"
+                        name="prenom"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="name">Cin</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cin"
+                        required
+                        [(ngModel)]="admin.cin"
+                        name="cin"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">
+                  Contacts
+                </h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="name"
+                          >Email</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="email"
+                          required
+                          [(ngModel)]="admin.email"
+                          name="email"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="name"
+                          >Teléphone</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="tel"
+                          required
+                          [(ngModel)]="admin.tel"
+                          name="tel"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Description -->
+              </form>
+              <button class="btn btn-primary btn-block">
+                Modifier
+              </button>
+            </div>
+          </form>
+
+          <!-- <div class="alert alert-success" *ngIf="isSuccessful">
+            L'ajout est réussie!
+          </div> -->
+        </div>
+        <div *ngIf="showMsg">
+          <div class="alert alert-success">
+            La modification est réussie!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

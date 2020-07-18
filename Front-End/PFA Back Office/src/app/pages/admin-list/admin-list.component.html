@@ -1,0 +1,125 @@
+<div
+  class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="
+    min-height: 400px;
+    background-image: url(assets/img/theme/profile-cover.jpg);
+    background-size: cover;
+    background-position: center top;
+  "
+>
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="col-lg-5 col-md-7">
+      <h3 class="display-2 text-white" style="color: yellow;">
+        Reservi Tbibek
+      </h3>
+      <p class="mt-0 mb-5" style="color: yellow;">
+        Liste administrateurs
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card bg-default shadow">
+        <div class="card-header bg-transparent border-0">
+          <h3 class="text-white mb-0">
+            Liste Administrateurs
+            <!--  <button
+              type="submit"
+              class="btn btn-primary"
+              [routerLink]="['/medecin-create']"
+              style="float: right;"
+            >
+              Ajouter medecin
+            </button> -->
+          </h3>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-items-center table-dark table-flush">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Adminstrateur</th>
+                <th scope="col">Cin</th>
+                <th scope="col">Telephone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let admin of admins
+                    | async
+                    | paginate
+                      : {
+                          id: 'listing_pagination',
+                          itemsPerPage: 4,
+                          currentPage: page,
+                          totalItems: totalRecords
+                        }
+                "
+              >
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <a
+                      href="javascript:void(0)"
+                      class="avatar rounded-circle mr-3"
+                    >
+                      <img
+                        alt="Image placeholder"
+                        src="../assets/img/theme/admin.png"
+                      />
+                    </a>
+                    <div class="media-body">
+                      <span class="badge badge-dot ml-4">
+                        <i class="bg-warning"></i>
+                      </span>
+                      <span class="mb-0 text-sm"
+                        >{{ admin.nom }} {{ admin.prenom }}</span
+                      >
+                    </div>
+                  </div>
+                </th>
+
+                <td>
+                  <span class="badge badge-dot">
+                    <i class="bg-primary"></i>
+                  </span>
+                  {{ admin.cin }}
+                </td>
+
+                <td>
+                  <span class="badge badge-dot">
+                    <i class="bg-success"></i>
+                  </span>
+                  {{ admin.tel }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer py-4" class="thead-dark">
+          <ul class="pagination justify-content-center mb-0">
+            <div>
+              <pagination-controls
+                id="listing_pagination"
+                maxSize="5"
+                directionLinks="true"
+                (pageChange)="page = $event"
+              ></pagination-controls>
+            </div>
+          </ul>
+        </div>
+        <!--fin pagination-->
+      </div>
+    </div>
+  </div>
+  <!-- Dark table -->
+
+  <!-- houni wfé table-->
+  <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0"></div>
+</div>

@@ -1,0 +1,492 @@
+<div class="header bg-gradient-danger py-7 py-lg-8">
+  <div class="container">
+    <div class="header-body text-center mb-7">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">« RESERVI TBIBEK »</h1>
+          <p style="color: yellow;">
+            Avec ce portail, vous allez pourvoir prendre des rendez-vous
+            médicale dans quelques cliques !
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg
+      x="0"
+      y="0"
+      viewBox="0 0 2560 100"
+      preserveAspectRatio="none"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</div>
+<div class="container mt--8 pb-5">
+  <!-- Table -->
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-header bg-transparent pb-5">
+          <div class="text-muted text-center mt-2 mb-4">
+            <small>Sign up with</small>
+          </div>
+          <div class="text-center">
+            <a href="javascript:void(0)" class="btn btn-neutral btn-icon mr-4">
+              <span class="btn-inner--icon"
+                ><img src="assets/img/icons/common/github.svg"
+              /></span>
+              <span class="btn-inner--text">Github</span>
+            </a>
+            <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+              <span class="btn-inner--icon"
+                ><img src="assets/img/icons/common/google.svg"
+              /></span>
+              <span class="btn-inner--text">Google</span>
+            </a>
+          </div>
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+          <div class="text-center text-muted mb-4">
+            <small>Or sign up with credentials</small>
+          </div>
+          <!--Register form ejdid-->
+
+          <form
+            *ngIf="!isSuccessful"
+            name="form"
+            (ngSubmit)="f.form.valid && onSubmit()"
+            #f="ngForm"
+            novalidate
+          >
+            <!--fin t5arbich-->
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-single-02"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Nom d'utilisateur"
+                  class="form-control"
+                  name="username"
+                  [(ngModel)]="form.username"
+                  required
+                  minlength="3"
+                  maxlength="20"
+                  #username="ngModel"
+                />
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+                <div *ngIf="username.errors.required">
+                  Le nom d'utilisateur est obligatoire
+                </div>
+                <div *ngIf="username.errors.minlength">
+                  Le nom d'utilisateur doit avoir au mois 3 caractéres
+                </div>
+                <div *ngIf="username.errors.maxlength">
+                  Le nom d'utilisateur doit avoir au maximum 20 caractéres
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-circle-08"></i
+                  ></span>
+                </div>
+                <input
+                  placeholder="Nom"
+                  type="text"
+                  class="form-control"
+                  name="nom"
+                  [(ngModel)]="form.nom"
+                  required
+                  #nom="ngModel"
+                />
+              </div>
+
+              <div class="alert-danger" *ngIf="f.submitted && nom.invalid">
+                <div *ngIf="nom.errors.required">
+                  Le nom est obligatoire
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-circle-08"></i
+                  ></span>
+                </div>
+
+                <input
+                  type="text"
+                  placeholder="Prenom"
+                  class="form-control"
+                  name="prenom"
+                  [(ngModel)]="form.prenom"
+                  required
+                  #prenom="ngModel"
+                />
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && prenom.invalid">
+                <div *ngIf="prenom.errors.required">
+                  Le prenom est obligatoire
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-email-83"></i
+                  ></span>
+                </div>
+
+                <input
+                  type="email"
+                  placeholder="Email"
+                  class="form-control"
+                  name="email"
+                  [(ngModel)]="form.email"
+                  required
+                  email
+                  #email="ngModel"
+                />
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+                <div *ngIf="email.errors.required">
+                  L'Email est obligatoire
+                </div>
+                <div *ngIf="email.errors.email">
+                  L'Email doit être une adresse email valide
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-mobile-button"></i
+                  ></span>
+                </div>
+
+                <input
+                  type="text"
+                  placeholder="Téléphone"
+                  class="form-control"
+                  name="tel"
+                  [(ngModel)]="form.tel"
+                  required
+                  #tel="ngModel"
+                />
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && tel.invalid">
+                <div *ngIf="tel.errors.required">
+                  Le numéro de teéléphone est obligatoire
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-lock-circle-open"></i
+                  ></span>
+                </div>
+                <input
+                  type="password"
+                  placeholder="Mot de passe"
+                  class="form-control"
+                  name="password"
+                  [(ngModel)]="form.password"
+                  required
+                  minlength="6"
+                  #password="ngModel"
+                />
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+                <div *ngIf="password.errors.required">
+                  Le mot de passe est obligatoire
+                </div>
+                <div *ngIf="password.errors.minlength">
+                  Le mot de passe doit avoir au moins 6 caractéres
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="custom-control custom-radio">
+                <input
+                  type="radio"
+                  id="customRadio1"
+                  name="role"
+                  class="custom-control-input"
+                  [(ngModel)]="form.role"
+                  required
+                  value="patient"
+                  #role="ngModel"
+                  checked
+                />
+                <label class="custom-control-label" for="customRadio1"
+                  >Patient</label
+                >
+              </div>
+              <div class="custom-control custom-radio">
+                <input
+                  type="radio"
+                  id="customRadio2"
+                  name="role"
+                  class="custom-control-input"
+                  [(ngModel)]="form.role"
+                  required
+                  value="medecin"
+                  #role="ngModel"
+                />
+                <label class="custom-control-label" for="customRadio2"
+                  >Medecin</label
+                >
+              </div>
+
+              <div class="alert-danger" *ngIf="f.submitted && role.invalid">
+                <div *ngIf="role.errors.required">
+                  Vous devez choisir un role
+                </div>
+              </div>
+            </div>
+
+            <!--debut champs propose au patient-->
+
+            <div *ngIf="form.role == 'patient'">
+              <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="ni ni-sound-wave"></i
+                    ></span>
+                  </div>
+
+                  <input
+                    type="date"
+                    placeholder="Date de naissance"
+                    class="form-control"
+                    name="date_naissance"
+                    [(ngModel)]="form.date_naissance"
+                    required
+                    date_naissance
+                    #date_naissance="ngModel"
+                  />
+                </div>
+                <div
+                  class="alert-danger"
+                  *ngIf="f.submitted && date_naissance.invalid"
+                >
+                  <div *ngIf="date_naissance.errors.required">
+                    La date de naissance est obligatoire
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--fin champs propre au patient-->
+
+            <!--debut champs propre au medecin-->
+
+            <div *ngIf="form.role == 'medecin'">
+              <!-- select list-->
+              <div class="form-group">
+                <select
+                  name="adresse"
+                  placeholder="Adresse"
+                  [(ngModel)]="form.adresse"
+                  class="form-control"
+                  adresse
+                  #adresse="ngModel"
+                  style="height: 50px; overflow: scroll;"
+                >
+                  <option [ngValue]="null" [disabled]="true">
+                    <i class="ni ni-pin-3">Ville</i></option
+                  >
+                  <option value="Tunis">Tunis</option>
+                  <option value="BenArous">Ben arous</option>
+                  <option value="Bizerte">Bizerte</option>
+                  <option value="Beja">Beja</option>
+                  <option value="zahra">Zahra</option>
+                  <option value="rades">Rades</option>
+                  <option value="zaghouan">Zaghouan</option>
+                  <option value="kef">Kef</option>
+                  <option value="Sfax">Sfax</option>
+                  <option value="Sousse">Sousse</option>
+                  <option value="Monastir">Monastir</option>
+                  <option value="Ariana">Ariana</option>
+                  <option value="Manouba">Manouba</option>
+                  <option value="Kairouan">Kairouan</option>
+                  <option value="Jendouba">Jendouba</option>
+                  <option value="Gafsa">Gafsa</option>
+                  <option value="Gabes">Gabes</option>
+                  <option value="Siliana">Siliana</option>
+                  <option value="Kebili">Kebili</option>
+                  <option value="Tataouine">Tataouine</option>
+                  <option value="Djerba">Djerba</option>
+                  <option value="SidiBouzid">Sidi Bouzid</option>
+                  <option value="Nabeul">Nabeul</option>
+                  <option value="Mahdia">Mahdia</option>
+                </select>
+
+                <div
+                  class="alert-danger"
+                  *ngIf="f.submitted && adresse.invalid"
+                >
+                  <div *ngIf="adresse.errors.required">
+                    L'adresse est obligatoire
+                  </div>
+                </div>
+              </div>
+              <!--fin select list -->
+              <!-- specialité-->
+
+              <div class="form-group">
+                <select
+                  name="specialite"
+                  placeholder="Adresse"
+                  [(ngModel)]="form.specialite"
+                  class="form-control"
+                  specialite
+                  #specialite="ngModel"
+                  style="height: 50px; overflow: scroll;"
+                >
+                  <option [ngValue]="null" [disabled]="true">
+                    <i class="ni ni-pin-3">Specialité</i></option
+                  >
+
+                  <option value="Cardiologue">Cardiologue</option>
+                  <option value="Chirurgien Esthétique"
+                    >Chirurgien Esthétique</option
+                  >
+                  <option value="Dentiste">Dentiste</option>
+                  <option value="Dermatologue">Dermatologue</option>
+                  <option value="Endocrinlogue Diabétologue"
+                    >Endocrinlogue Diabétologue</option
+                  >
+                  <option value="Gastro-entérologue">Gastro-entérologue</option>
+                  <option value="Géneraliste">Géneraliste</option>
+                  <option value="Gynécologue Obstétricien"
+                    >Gynécologue Obstétricien</option
+                  >
+                  <option value="Interniste">Interniste</option>
+                  <option value="Néphrologue">Néphrologue</option>
+                  <option value="Neurologue">Neurologue</option>
+                  <option value="Nutritionniste">Nutritionniste</option>
+                  <option value="Ophtalamogue">Ophtalamogue</option>
+                  <option value="Oto-Rhino-Laryngologiste"
+                    >Oto-Rhino-Laryngologiste</option
+                  >
+                  <option value="Pédiatre">Pédiatre</option>
+                  <option value="Pneumologue">Pneumologue</option>
+                  <option value="Psychiatre">Psychiatre</option>
+                  <option value="Psychothérapeute">Psychothérapeute</option>
+                  <option value="Radiologue">Radiologue</option>
+                  <option value="Rhumatologue">Rhumatologue</option>
+                  <option value="Sexologue">Sexologue</option>
+                  <option value="Urologue">Urologue</option>
+                </select>
+
+                <div
+                  class="alert-danger"
+                  *ngIf="f.submitted && specialite.invalid"
+                >
+                  <div *ngIf="specialite.errors.required">
+                    La specialite est obligatoire
+                  </div>
+                </div>
+              </div>
+              <!-- fin specialité-->
+
+              <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="ni ni-badge"></i
+                    ></span>
+                  </div>
+
+                  <input
+                    type="number"
+                    placeholder="Cin"
+                    class="form-control"
+                    name="cin"
+                    [(ngModel)]="form.cin"
+                    required
+                    cin
+                    #cin="ngModel"
+                  />
+                </div>
+                <div class="alert-danger" *ngIf="f.submitted && cin.invalid">
+                  <div *ngIf="cin.errors.required">
+                    Le CIN est obligatoire
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="ni ni-money-coins"></i
+                    ></span>
+                  </div>
+
+                  <input
+                    type="number"
+                    placeholder="Prix visite"
+                    class="form-control"
+                    name="prixVisite"
+                    [(ngModel)]="form.prixVisite"
+                    required
+                    prixVisite
+                    #prixVisite="ngModel"
+                  />
+                </div>
+                <div
+                  class="alert-danger"
+                  *ngIf="f.submitted && prixVisite.invalid"
+                >
+                  <div *ngIf="prixVisite.errors.required">
+                    Le prix de la visite est obligatoire
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--fin champs propose au medecin-->
+
+            <div class="form-group">
+              <button class="btn btn-primary btn-block">S'inscrire</button>
+            </div>
+
+            <div
+              class="alert alert-warning"
+              *ngIf="f.submitted && isSignUpFailed"
+            >
+              L'inscription a échoué!<br />{{ errorMessage }}
+            </div>
+          </form>
+
+          <div class="alert alert-success" *ngIf="isSuccessful">
+            Votre inscription est réussie!
+          </div>
+
+          <!--Register form ejdid-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

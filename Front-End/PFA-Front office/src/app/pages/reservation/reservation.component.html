@@ -1,0 +1,166 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="app">
+      <!-- <div class="app-top">
+                                  <button (click)="toggleVisible()">toggle visible</button>
+                                  <button (click)="toggleWeekends()">toggle weekends</button>
+                                  <button (click)="gotoPast()">go to a date in the past</button>
+                                  (also, click a date/time to add an event)
+                                </div>-->
+
+      <div class="app-calendar" *ngIf="calendarVisible">
+        <full-calendar
+          #calendar
+          defaultView="dayGridMonth"
+          [header]="{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+          }"
+          [plugins]="calendarPlugins"
+          [weekends]="calendarWeekends"
+          [events]="calendarEvents"
+          [timeZone]="calendarTimeZone"
+          editable="true"
+          droppable="true"
+        ></full-calendar>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer"></div>
+</ng-template>
+
+<div class="dispo" id="dispo">
+  <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col">
+            <div class="card shadow">
+              <div class="card-header bg-transparent">
+                <div class="d-flex justify-content-between">
+                  <h3 class="mb-0">Reservation</h3>
+                  <button
+                    type="button"
+                    class="btn btn-info"
+                    (click)="open(content)"
+                  >
+                    Voir Calendrier Medecin
+                  </button>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <div class="app">
+                  <div
+                    *ngIf="alertDispo"
+                    class="alert alert-info alert-dismissible fade show"
+                    role="alert"
+                  >
+                    {{ messageDispo
+                    }}{{ changeDatetoUTC(tab.start) | date: "dd/MM/yyyy" }}
+
+                    <ul *ngIf="dispoDay.length != 0">
+                      <li *ngFor="let el of dispoDay">
+                        de {{ changeDatetoUTC(el.start) | date: "shortTime" }} à
+                        {{ changeDatetoUTC(el.end) | date: "shortTime" }}
+                      </li>
+                    </ul>
+
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                      (click)="closeAlertDispo()"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div
+                    *ngIf="alertReserv"
+                    class="alert alert-warning alert-dismissible fade show"
+                    role="alert"
+                  >
+                    {{ tab.start | date: "dd/MM/yyyy h:mm a " }}
+                    {{ messageReserv }}
+
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                      (click)="closeAlertReserv()"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div *ngIf="alert" [class]="typeAlert" role="alert">
+                    {{ message }}
+
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                      (click)="closeAlert()"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form name="form" #f="ngForm">
+                    <div class="form-group">
+                      <label for="start">Date et Heure</label>
+                      <input
+                        type="datetime-local"
+                        class="form-control"
+                        name="start"
+                        [(ngModel)]="form.start"
+                        #start="ngModel"
+                        (change)="afficherDispo()"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="end">Commentaire</label>
+                      <input
+                        type="textarea"
+                        class="form-control textarea"
+                        name="commentaire"
+                        [(ngModel)]="form.commentaire"
+                        required
+                        #end="ngModel"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      class="newReserv btn btn-outline-primary"
+                      (click)="onSubmit()"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page content -->
+      <div class="container-fluid mt--7">
+        <!-- Table -->
+      </div>
+    </div>
+  </div>
+</div>

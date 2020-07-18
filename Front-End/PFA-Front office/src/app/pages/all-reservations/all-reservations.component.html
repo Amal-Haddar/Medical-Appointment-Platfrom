@@ -1,0 +1,147 @@
+<div class="dispo" id="dispo">
+  <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col">
+            <div class="card shadow">
+              <div class="card-header bg-transparent">
+                <h3 class="mb-0">Mes Réservation</h3>
+                <a class="newDispo btn btn-outline-primary" href="#/recherche/">
+                  Nouvelle Réservation
+                </a>
+              </div>
+
+              <div class="card-body">
+                <ng-template #content let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <div>
+                      <h4 class="modal-title" id="modal-basic-title">
+                        Modifier ou Annuler la réservation
+                      </h4>
+                    </div>
+                    <button
+                      type="button"
+                      class="close"
+                      aria-label="Close"
+                      (click)="d('Cross click')"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div
+                      *ngIf="alert"
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                    >
+                      <strong>Success !</strong> Votre réservation a été
+                      {{ operation }} avec succés.
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="alert"
+                        aria-label="Close"
+                        (click)="closeAlert()"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form name="form" #f="ngForm">
+                      <div class="form-group">
+                        <label for="start">Date et Heure</label>
+                        <input
+                          type="datetime-local"
+                          class="form-control"
+                          name="start"
+                          [(ngModel)]="form.start"
+                          #start="ngModel"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <div class="card bg-light mb-3">
+                          <!--<div class="card-header">
+                            Medecin
+                          </div>-->
+                          <div class="card-body bg-secondary">
+                            <h5 class="card-title">
+                              Dr. {{ medecin.nom }} {{ medecin.prenom }}
+                            </h5>
+
+                            <p class="card-text">
+                              Spécialité : {{ medecin.specialite }}
+                              <br />Adresse : {{ medecin.adresse }} <br />
+
+                              Télephone : {{ medecin.tel }}
+                            </p>
+                            <div style="display: inline;"></div>
+                            <a
+                              style="display: inline; margin-left: 230px;"
+                              [href]="'#/details-Medecin/' + medecin.id"
+                              class="btn btn-outline-info"
+                              (click)="d('Cross click')"
+                              >Voir Profil Medecin</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <button
+                          class="btn btn-warning btn-block"
+                          (click)="onModify()"
+                        >
+                          Modifier
+                        </button>
+                        <button
+                          class="btn btn-danger btn-block"
+                          (click)="onDelete()"
+                        >
+                          Annuler
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer"></div>
+                </ng-template>
+                <div class="app">
+                  <!-- <div class="app-top">
+                                              <button (click)="toggleVisible()">toggle visible</button>
+                                              <button (click)="toggleWeekends()">toggle weekends</button>
+                                              <button (click)="gotoPast()">go to a date in the past</button>
+                                              (also, click a date/time to add an event)
+                                            </div>-->
+
+                  <div class="app-calendar" *ngIf="calendarVisible">
+                    <full-calendar
+                      #calendar
+                      defaultView="dayGridMonth"
+                      [header]="{
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                      }"
+                      [plugins]="calendarPlugins"
+                      [weekends]="calendarWeekends"
+                      [events]="calendarEvents"
+                      [timeZone]="calendarTimeZone"
+                      (dateClick)="handleDateClick($event)"
+                      editable="true"
+                      droppable="true"
+                      (eventClick)="EventClick($event, content)"
+                    ></full-calendar>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page content -->
+      <div class="container-fluid mt--7">
+        <!-- Table -->
+      </div>
+    </div>
+  </div>
+</div>

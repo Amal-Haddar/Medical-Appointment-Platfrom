@@ -1,0 +1,256 @@
+<div class="header bg-gradient-danger py-7 py-lg-8">
+  <div class="container">
+    <div class="header-body text-center mb-7">
+      <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-6">
+          <h1 style="color: yellow;">« RESERVI TBIBEK »</h1>
+          <h2 class="text-white">
+            La premiere plateforme de prise de rendez-vous médicale en Tunisie!
+            <br />
+          </h2>
+          <p style="color: yellow;">
+            Avec ce portail, vous allez pourvoir prendre des rendez-vous
+            médicale dans quelques cliques !
+          </p>
+        </div>
+
+        <div class="input-group md-form form-sm form-2 pl-0">
+          <!-- houni l search par nom-->
+          <div class="input-group md-form form-sm form-2 pl-0">
+            <input
+              class="form-control my-0 py-1"
+              type="text"
+              placeholder="Rechercher medecin .. Entrer son nom "
+              aria-label="Search"
+              name="prenom"
+              [(ngModel)]="prenom"
+            />
+            <div class="input-group-append">
+              <span id="basic-text1">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  (click)="findUserByPrenomId()"
+                >
+                  <span class="glyphicon glyphicon-search"></span>
+                  <i
+                    class="fas fa-search text-grey"
+                    aria-hidden="true"
+                  ></i></button
+              ></span>
+            </div>
+
+            <!-- select list : search par adresse-->
+            <form class="form-inline md-form mr-auto mb-4">
+              <div class="form-group">
+                <!-- <label for="adresse">Adresse</label> -->
+
+                <select
+                  name="email"
+                  [(ngModel)]="email"
+                  class="form-control"
+                  (change)="findUserByEmailId()"
+                >
+                  <option [ngValue]="null" [disabled]="true"
+                    >Recherche par adresse</option
+                  >
+                  <option value="Tunis">Tunis</option>
+                  <option value="Ben arous">Ben arous</option>
+                  <option value="Bizerte">Bizerte</option>
+                  <option value="Bizerte">Beja</option>
+                  <option value="zahra">Zahra</option>
+                  <option value="rades">Rades</option>
+                  <option value="zaghouan">Zaghouan</option>
+                  <option value="kef">Kef</option>
+                  <option value="Sfax">Sfax</option>
+                  <option value="Sousse">Sousse</option>
+                  <option value="Monastir">Monastir</option>
+                  <option value="Ariana">Ariana</option>
+                  <option value="Manouba">Manouba</option>
+                  <option value="Kairouan">Kairouan</option>
+                  <option value="Jendouba">Jendouba</option>
+                  <option value="Gafsa">Gafsa</option>
+                  <option value="Gabes">Gabes</option>
+                  <option value="Siliana">Siliana</option>
+                  <option value="Kebili">Kebili</option>
+                  <option value="Tataouine">Tataouine</option>
+                  <option value="Djerba">Djerba</option>
+                  <option value="Sidi Bouzid">Sidi Bouzid</option>
+                  <option value="Nabeul">Nabeul</option>
+                  <option value="Mahdia">Mahdia</option>
+                </select>
+              </div>
+            </form>
+            <!--fin select list -->
+            <!--select list : specialité-->
+
+            <!-- select list spe-->
+            <form class="form-inline md-form mr-auto mb-4">
+              <div class="form-group">
+                <!-- <label for="adresse">Adresse</label> -->
+
+                <select
+                  name="specialite"
+                  [(ngModel)]="specialite"
+                  class="form-control"
+                  (change)="findUserBySpecialiteId()"
+                >
+                  <option [ngValue]="null" [disabled]="true"
+                    >Recherche par specialité</option
+                  >
+                  <option value="Cardiologue">Cardiologue</option>
+                  <option value="Chirurgien Esthétique"
+                    >Chirurgien Esthétique</option
+                  >
+                  <option value="Dentiste">Dentiste</option>
+                  <option value="Dermatologue">Dermatologue</option>
+                  <option value="Endocrinlogue Diabétologue"
+                    >Endocrinlogue Diabétologue</option
+                  >
+                  <option value="Gastro-entérologue">Gastro-entérologue</option>
+                  <option value="Géneraliste">Géneraliste</option>
+                  <option value="Gynécologue Obstétricien"
+                    >Gynécologue Obstétricien</option
+                  >
+                  <option value="Interniste">Interniste</option>
+                  <option value="Néphrologue">Néphrologue</option>
+                  <option value="Neurologue">Neurologue</option>
+                  <option value="Nutritionniste">Nutritionniste</option>
+                  <option value="Ophtalamogue">Ophtalamogue</option>
+                  <option value="Oto-Rhino-Laryngologiste"
+                    >Oto-Rhino-Laryngologiste</option
+                  >
+                  <option value="Pédiatre">Pédiatre</option>
+                  <option value="Pneumologue">Pneumologue</option>
+                  <option value="Psychiatre">Psychiatre</option>
+                  <option value="Psychothérapeute">Psychothérapeute</option>
+                  <option value="Radiologue">Radiologue</option>
+                  <option value="Rhumatologue">Rhumatologue</option>
+                  <option value="Sexologue">Sexologue</option>
+                  <option value="Urologue">Urologue</option>
+                </select>
+              </div>
+            </form>
+            <!--fin select list speci -->
+            <!--search3-->
+          </div>
+          <!-- houni l search par nom wfet-->
+        </div>
+      </div>
+      <!--houni table 7atitou -->
+      <!-- Table -->
+      <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <h3 class="mb-0" type="button" (click)="reloadData()">
+                NOS MEDECINS
+              </h3>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Téléphone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Spécialité</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let user of users
+                        | paginate
+                          : {
+                              id: 'listing_pagination',
+                              itemsPerPage: 5,
+                              currentPage: page,
+                              totalItems: totalRecords
+                            }
+                    "
+                  >
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a
+                          href="javascript:void(0)"
+                          class="avatar rounded-circle mr-3"
+                        >
+                          <img
+                            alt="Image placeholder"
+                            src="../assets/img/theme/avatar-medecin.png"
+                          />
+                        </a>
+                        <div class="media-body">
+                          <span class="mb-0 text-sm"
+                            >{{ user.nom }} {{ user.prenom }}</span
+                          >
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      {{ user.adresse }}
+                    </td>
+
+                    <td>
+                      {{ user.tel }}
+                    </td>
+
+                    <td>
+                      {{ user.email }}
+                    </td>
+                    <td>
+                      {{ user.specialite }}
+                    </td>
+                    <td>
+                      <button
+                        (click)="userDetails(user.id)"
+                        type="button"
+                        class="btn btn-info"
+                      >
+                        Details
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-footer py-4">
+              <ul class="pagination justify-content-center mb-0">
+                <div>
+                  <pagination-controls
+                    id="listing_pagination"
+                    maxSize="5"
+                    directionLinks="true"
+                    (pageChange)="page = $event"
+                  ></pagination-controls>
+                </div>
+              </ul>
+            </div>
+            <!--fin pagination-->
+          </div>
+        </div>
+      </div>
+      <!-- Dark table -->
+      <!-- houni wfé table-->
+    </div>
+
+    <div class="separator separator-bottom separator-skew zindex-100">
+      <svg
+        x="0"
+        y="0"
+        viewBox="0 0 2560 100"
+        preserveAspectRatio="none"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
+    </div>
+  </div>
+  <!-- Page content -->
+
+  <div class="container mt--8 pb-5"></div>
+</div>

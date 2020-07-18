@@ -1,0 +1,134 @@
+<div class="dispo" id="dispo">
+  <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col">
+            <div class="card shadow">
+              <div class="card-header bg-transparent">
+                <h3 class="mb-0">Disponibility</h3>
+                <button
+                  type="button"
+                  class="newDispo btn btn-outline-primary"
+                  (click)="open(content)"
+                >
+                  New Disponibility
+                </button>
+              </div>
+
+              <div class="card-body">
+                <ng-template #content let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <div *ngIf="typeBtn == 'submit'">
+                      <h4 class="modal-title" id="modal-basic-title">
+                        Create New Disponibility
+                      </h4>
+                    </div>
+                    <div *ngIf="typeBtn == 'modify'">
+                      <h4 class="modal-title" id="modal-basic-title">
+                        Modify or Delete Disponibility
+                      </h4>
+                    </div>
+                    <button
+                      type="button"
+                      class="close"
+                      aria-label="Close"
+                      (click)="d('Cross click')"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form name="form" #f="ngForm">
+                      <div class="form-group">
+                        <label for="start">Start</label>
+                        <input
+                          type="datetime-local"
+                          class="form-control"
+                          name="start"
+                          [(ngModel)]="form.start"
+                          #start="ngModel"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="end">End</label>
+                        <input
+                          type="datetime-local"
+                          class="form-control"
+                          name="end"
+                          [(ngModel)]="form.end"
+                          required
+                          minlength="3"
+                          maxlength="20"
+                          #end="ngModel"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <div *ngIf="typeBtn == 'submit'">
+                          <button
+                            class="btn btn-success btn-block"
+                            (click)="onSubmit()"
+                          >
+                            Submit
+                          </button>
+                        </div>
+                        <div *ngIf="typeBtn == 'modify'">
+                          <button
+                            class="btn btn-warning btn-block"
+                            (click)="onSubmit()"
+                          >
+                            Modify
+                          </button>
+                          <button
+                            class="btn btn-danger btn-block"
+                            (click)="onDelete(); onSubmit()"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer"></div>
+                </ng-template>
+                <div class="app">
+                  <!-- <div class="app-top">
+                                            <button (click)="toggleVisible()">toggle visible</button>
+                                            <button (click)="toggleWeekends()">toggle weekends</button>
+                                            <button (click)="gotoPast()">go to a date in the past</button>
+                                            (also, click a date/time to add an event)
+                                          </div>-->
+
+                  <div class="app-calendar" *ngIf="calendarVisible">
+                    <full-calendar
+                      #calendar
+                      defaultView="dayGridMonth"
+                      [header]="{
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                      }"
+                      [plugins]="calendarPlugins"
+                      [weekends]="calendarWeekends"
+                      [events]="calendarEvents"
+                      [timeZone]="calendarTimeZone"
+                      (dateClick)="handleDateClick($event)"
+                      editable="true"
+                      droppable="true"
+                      (eventClick)="EventClick($event, content)"
+                    ></full-calendar>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page content -->
+      <div class="container-fluid mt--7">
+        <!-- Table -->
+      </div>
+    </div>
+  </div>
+</div>

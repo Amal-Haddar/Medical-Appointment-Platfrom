@@ -1,0 +1,273 @@
+<div class="header bg-gradient-danger py-7 py-lg-8">
+  <div class="container">
+    <div class="header-body text-center mb-7">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">« RESERVI TBIBEK »</h1>
+          <h1 style="color: #32325d;">ESPACE ADMINISTRATEUR</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg
+      x="0"
+      y="0"
+      viewBox="0 0 2560 100"
+      preserveAspectRatio="none"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</div>
+<div class="container mt--8 pb-5">
+  <!-- Table -->
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-header bg-transparent pb-5">
+          <div class="text-muted text-center mt-2 mb-4">
+            <small>Sign up with</small>
+          </div>
+          <div class="text-center">
+            <a href="javascript:void(0)" class="btn btn-neutral btn-icon mr-4">
+              <span class="btn-inner--icon"
+                ><img src="assets/img/icons/common/github.svg"
+              /></span>
+              <span class="btn-inner--text">Github</span>
+            </a>
+            <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+              <span class="btn-inner--icon"
+                ><img src="assets/img/icons/common/google.svg"
+              /></span>
+              <span class="btn-inner--text">Google</span>
+            </a>
+          </div>
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+          <div class="text-center text-muted mb-4">
+            <small>Or sign up with credentials</small>
+          </div>
+          <!--Register form ejdid-->
+
+          <form
+            *ngIf="!isSuccessful"
+            name="form"
+            (ngSubmit)="f.form.valid && onSubmit()"
+            #f="ngForm"
+            novalidate
+          >
+            <!--debut t5arbich-->
+
+            <!--fin t5arbich-->
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-single-02"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Nom d'utilisateur"
+                  class="form-control"
+                  name="username"
+                  [(ngModel)]="form.username"
+                  required
+                  minlength="3"
+                  maxlength="20"
+                  #username="ngModel"
+                />
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+                <div *ngIf="username.errors.required">
+                  Le nom d'utilisateur est obligatoire
+                </div>
+                <div *ngIf="username.errors.minlength">
+                  Le nom d'utilisateur doit avoir au mois 3 caractéres
+                </div>
+                <div *ngIf="username.errors.maxlength">
+                  Le nom d'utilisateur doit avoir au maximum 20 caractéres
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-circle-08"></i
+                  ></span>
+                </div>
+                <input
+                  placeholder="Nom"
+                  type="text"
+                  class="form-control"
+                  name="nom"
+                  [(ngModel)]="form.nom"
+                  required
+                  #nom="ngModel"
+                />
+              </div>
+
+              <div class="alert-danger" *ngIf="f.submitted && nom.invalid">
+                <div *ngIf="nom.errors.required">
+                  Le nom est obligatoire
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-circle-08"></i
+                  ></span>
+                </div>
+
+                <input
+                  type="text"
+                  placeholder="Prenom"
+                  class="form-control"
+                  name="prenom"
+                  [(ngModel)]="form.prenom"
+                  required
+                  #prenom="ngModel"
+                />
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && prenom.invalid">
+                <div *ngIf="prenom.errors.required">
+                  Le prenom est obligatoire
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-email-83"></i
+                  ></span>
+                </div>
+
+                <input
+                  type="email"
+                  placeholder="Email"
+                  class="form-control"
+                  name="email"
+                  [(ngModel)]="form.email"
+                  required
+                  email
+                  #email="ngModel"
+                />
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+                <div *ngIf="email.errors.required">
+                  L'Email est obligatoire
+                </div>
+                <div *ngIf="email.errors.email">
+                  L'Email doit être une adresse email valide
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-badge"></i
+                  ></span>
+                </div>
+
+                <input
+                  type="number"
+                  placeholder="CIN"
+                  class="form-control"
+                  name="cin"
+                  [(ngModel)]="form.cin"
+                  required
+                  cin
+                  #cin="ngModel"
+                />
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && cin.invalid">
+                <div *ngIf="cin.errors.required">
+                  La Cin est obligatoire
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-mobile-button"></i
+                  ></span>
+                </div>
+
+                <input
+                  type="number"
+                  placeholder="Téléphone"
+                  class="form-control"
+                  name="tel"
+                  [(ngModel)]="form.tel"
+                  required
+                  #tel="ngModel"
+                />
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && tel.invalid">
+                <div *ngIf="tel.errors.required">
+                  Le numéro de téléphone est obligatoire
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="ni ni-lock-circle-open"></i
+                  ></span>
+                </div>
+                <input
+                  type="password"
+                  placeholder="Mot de passe"
+                  class="form-control"
+                  name="password"
+                  [(ngModel)]="form.password"
+                  required
+                  minlength="6"
+                  #password="ngModel"
+                />
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+                <div *ngIf="password.errors.required">
+                  Le mot de passe est obligatoire
+                </div>
+                <div *ngIf="password.errors.minlength">
+                  Le mot de passe doit avoir au moins 6 caractéres
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button class="btn btn-primary btn-block">S'inscrire</button>
+            </div>
+
+            <div
+              class="alert alert-warning"
+              *ngIf="f.submitted && isSignUpFailed"
+            >
+              L'inscription a échoué!<br />{{ errorMessage }}
+            </div>
+          </form>
+
+          <div class="alert alert-success" *ngIf="isSuccessful">
+            Votre inscription est réussie!
+          </div>
+
+          <!--Register form ejdid-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,264 @@
+<div
+  class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="
+    min-height: 400px;
+    background-image: url(assets/img/theme/profile-cover.jpg);
+    background-size: cover;
+    background-position: center top;
+  "
+>
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="col-lg-5 col-md-7">
+      <h3 class="display-2 text-white" style="color: yellow;">
+        Reservi Tbibek
+      </h3>
+      <p class="mt-0 mb-5" style="color: yellow;">
+        Liste medecins
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <!--search-->
+      <div class="input-group md-form form-sm form-2 pl-0">
+        <!-- houni l search par nom-->
+        <div class="input-group md-form form-sm form-2 pl-0">
+          <input
+            class="form-control my-0 py-1"
+            type="text"
+            placeholder="Rechercher medecin .. Entrer son nom (et/ou) prenom"
+            aria-label="Search"
+            name="prenom"
+            [(ngModel)]="prenom"
+          />
+          <div class="input-group-append">
+            <span id="basic-text1">
+              <button
+                class="btn btn-primary"
+                type="button"
+                (click)="findMedecinByPrenomId()"
+              >
+                <span class="glyphicon glyphicon-search"></span>
+                <i
+                  class="fas fa-search text-grey"
+                  aria-hidden="true"
+                ></i></button
+            ></span>
+          </div>
+
+          <!-- select list : search par adresse-->
+          <form class="form-inline md-form mr-auto mb-4">
+            <div class="form-group">
+              <!-- <label for="adresse">Adresse</label> -->
+
+              <select
+                name="email"
+                [(ngModel)]="email"
+                class="form-control"
+                (change)="getMedecinByEmailId()"
+              >
+                <option [ngValue]="null" [disabled]="true"
+                  >Recherche par adresse</option
+                >
+                <option value="Tunis">Tunis</option>
+                <option value="Ben arous">Ben arous</option>
+                <option value="Bizerte">Bizerte</option>
+                <option value="Bizerte">Beja</option>
+                <option value="zahra">Zahra</option>
+                <option value="rades">Rades</option>
+                <option value="zaghouan">Zaghouan</option>
+                <option value="kef">Kef</option>
+                <option value="Sfax">Sfax</option>
+                <option value="Sousse">Sousse</option>
+                <option value="Monastir">Monastir</option>
+                <option value="Ariana">Ariana</option>
+                <option value="Manouba">Manouba</option>
+                <option value="Kairouan">Kairouan</option>
+                <option value="Jendouba">Jendouba</option>
+                <option value="Gafsa">Gafsa</option>
+                <option value="Gabes">Gabes</option>
+                <option value="Siliana">Siliana</option>
+                <option value="Kebili">Kebili</option>
+                <option value="Tataouine">Tataouine</option>
+                <option value="Djerba">Djerba</option>
+                <option value="Sidi Bouzid">Sidi Bouzid</option>
+                <option value="Nabeul">Nabeul</option>
+                <option value="Mahdia">Mahdia</option>
+              </select>
+            </div>
+          </form>
+          <!--fin select list -->
+          <!--select list : specialité-->
+
+          <!-- select list spe-->
+          <form class="form-inline md-form mr-auto mb-4">
+            <div class="form-group">
+              <!-- <label for="adresse">Adresse</label> -->
+
+              <select
+                name="specialite"
+                [(ngModel)]="specialite"
+                class="form-control"
+                (change)="findMedecinBySpecialiteId()"
+              >
+                <option [ngValue]="null" [disabled]="true"
+                  >Recherche par specialité</option
+                >
+                <option value="Cardiologue">Cardiologue</option>
+                <option value="Chirurgien Esthétique"
+                  >Chirurgien Esthétique</option
+                >
+                <option value="Dentiste">Dentiste</option>
+                <option value="Dermatologue">Dermatologue</option>
+                <option value="Endocrinlogue Diabétologue"
+                  >Endocrinlogue Diabétologue</option
+                >
+                <option value="Gastro-entérologue">Gastro-entérologue</option>
+                <option value="Géneraliste">Géneraliste</option>
+                <option value="Gynécologue Obstétricien"
+                  >Gynécologue Obstétricien</option
+                >
+                <option value="Interniste">Interniste</option>
+                <option value="Néphrologue">Néphrologue</option>
+                <option value="Neurologue">Neurologue</option>
+                <option value="Nutritionniste">Nutritionniste</option>
+                <option value="Ophtalamogue">Ophtalamogue</option>
+                <option value="Oto-Rhino-Laryngologiste"
+                  >Oto-Rhino-Laryngologiste</option
+                >
+                <option value="Pédiatre">Pédiatre</option>
+                <option value="Pneumologue">Pneumologue</option>
+                <option value="Psychiatre">Psychiatre</option>
+                <option value="Psychothérapeute">Psychothérapeute</option>
+                <option value="Radiologue">Radiologue</option>
+                <option value="Rhumatologue">Rhumatologue</option>
+                <option value="Sexologue">Sexologue</option>
+                <option value="Urologue">Urologue</option>
+              </select>
+            </div>
+          </form>
+          <!--fin select list speci -->
+          <!--search3-->
+        </div>
+        <!-- houni l search par nom wfet-->
+      </div>
+      <!--search-->
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0" type="button" (click)="ngOnInit()">
+            Liste Medecin
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [routerLink]="['/medecin-create']"
+              style="float: right;"
+            >
+              Ajouter medecin
+            </button>
+          </h3>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Specialité</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let medecin of medecins
+                    | paginate
+                      : {
+                          id: 'listing_pagination',
+                          itemsPerPage: 4,
+                          currentPage: page,
+                          totalItems: totalRecords
+                        }
+                "
+              >
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <a
+                      href="javascript:void(0)"
+                      class="avatar rounded-circle mr-3"
+                    >
+                      <img
+                        alt="Image placeholder"
+                        src="../assets/img/theme/bootstrap.jpg"
+                      />
+                    </a>
+                    <div class="media-body">
+                      <span class="mb-0 text-sm"
+                        >{{ medecin.nom }} {{ medecin.prenom }}</span
+                      >
+                    </div>
+                  </div>
+                </th>
+
+                <td>
+                  {{ medecin.adresse }}
+                </td>
+
+                <td>
+                  {{ medecin.specialite }}
+                </td>
+
+                <td>
+                  <button
+                    (click)="medecinDetails(medecin.id)"
+                    class="btn btn-info"
+                    style="margin-left: 20px; margin-right: 10px; width: 110px;"
+                  >
+                    Details
+                  </button>
+                  <button
+                    (click)="updateMedecin(medecin.id)"
+                    class="btn btn-warning"
+                    style="margin-left: 10px; margin-right: 10px; width: 110px;"
+                  >
+                    Modifier
+                  </button>
+                  <button
+                    (click)="deleteMedecin(medecin.id)"
+                    class="btn btn-danger"
+                    style="margin-left: 10px; width: 110px;"
+                  >
+                    Supprimer
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer py-4">
+          <ul class="pagination justify-content-center mb-0">
+            <div>
+              <pagination-controls
+                id="listing_pagination"
+                maxSize="5"
+                directionLinks="true"
+                (pageChange)="page = $event"
+              ></pagination-controls>
+            </div>
+          </ul>
+        </div>
+        <!--fin pagination-->
+      </div>
+    </div>
+  </div>
+  <!-- Dark table -->
+  <!-- houni wfé table-->
+  <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0"></div>
+</div>

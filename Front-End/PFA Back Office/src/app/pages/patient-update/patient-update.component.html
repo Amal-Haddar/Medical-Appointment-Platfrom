@@ -1,0 +1,145 @@
+<div
+  class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="
+    min-height: 400px;
+    background-image: url(assets/img/theme/profile-cover.jpg);
+    background-size: cover;
+    background-position: center top;
+  "
+>
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="col-lg-7 col-md-10">
+      <h1 class="display-2 text-white">Modifier patient</h1>
+      <p class="text mt-0 mb-5" style="color: yellow;">
+        {{ patient.nom }} {{ patient.prenom }}
+      </p>
+      <button type="button" class="btn btn-info" (click)="list()">
+        Revenir à la liste des patients
+      </button>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="submitted">
+  <form>
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col-xl-12 order-xl-1">
+          <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Modifier patient</h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form *ngIf="!showMsg" (ngSubmit)="onSubmit()">
+                <h6 class="heading-small text-muted mb-4">
+                  Informations personnelles
+                </h6>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label" for="name">Nom</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="nom"
+                        required
+                        [(ngModel)]="patient.nom"
+                        name="nom"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label" for="name"
+                        >Prenom</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="prenom"
+                        required
+                        [(ngModel)]="patient.prenom"
+                        name="prenom"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label" for="name"
+                        >Date de naissance</label
+                      >
+                      <input
+                        type="date "
+                        class="form-control"
+                        id="dateNaissance"
+                        required
+                        [(ngModel)]="patient.dateNaissance"
+                        name="dateNaissance"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="my-4" />
+                <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">
+                  Contacts
+                </h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="name"
+                          >Email</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="email"
+                          required
+                          [(ngModel)]="patient.email"
+                          name="email"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="name"
+                          >Teléphone</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="tel"
+                          required
+                          [(ngModel)]="patient.tel"
+                          name="tel"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-success">
+                  Modifier
+                </button>
+                <!-- Description -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="showMsg">
+        <div class="alert alert-success">
+          La modification est réussie!
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

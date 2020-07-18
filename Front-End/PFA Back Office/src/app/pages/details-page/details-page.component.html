@@ -1,0 +1,245 @@
+<div
+  class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="
+    min-height: 600px;
+    background-image: url(assets/img/theme/profile-cover.jpg);
+    background-size: cover;
+    background-position: center top;
+  "
+>
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="row">
+      <div class="col-lg-7 col-md-10">
+        <h1 class="display-2 text-white" style="color: yellow;">
+          Reservi Tbibek
+        </h1>
+        <p class="mt-0 mb-5" style="color: yellow;">
+          Avec cette plateforme, vous allez pourvoir prendre des rendez-vous
+          médicale dans quelques cliques !
+        </p>
+
+        <button type="button" class="btn btn-info" [routerLink]="['/search']">
+          Revenir à la page d'accueil
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+      <div class="card card-profile shadow">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2">
+            <div class="card-profile-image">
+              <a href="javascript:void(0)">
+                <img
+                  src="assets/img/theme/default-avatar.png"
+                  class="rounded-circle"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          <div class="d-flex justify-content-between">
+            <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4"
+              >Connect</a
+            >
+            <a
+              href="javascript:void(0)"
+              class="btn btn-sm btn-default float-right"
+              >Message</a
+            >
+          </div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+          <div class="row">
+            <div class="col">
+              <div
+                class="card-profile-stats d-flex justify-content-center mt-md-5"
+              ></div>
+            </div>
+          </div>
+          <div class="text-center">
+            <h3>
+              {{ user.nom
+              }}<span class="font-weight-light">,{{ user.prenom }}</span>
+            </h3>
+            <div class="h5 font-weight-300"></div>
+            <div class="h5 mt-4">
+              <i class="ni business_briefcase-24 mr-2"></i>{{ user.specialite }}
+            </div>
+            <div>
+              <i class="ni education_hat mr-2"></i>Université de Medecine de
+              Tunis
+            </div>
+            <hr class="my-4" />
+            <p>
+              Santé, premier des biens après la paix du coeur.
+            </p>
+            <a href="javascript:void(0)">Henri-Frédéric Amiel </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="d-flex justify-content-between">
+            <div class="col-8">
+              <h3 class="mb-0">Informations Medecin</h3>
+            </div>
+            <button
+              type="button"
+              class="btn btn-info"
+              *ngIf="currentUser == null"
+              [routerLink]="['/login']"
+            >
+              Prendre un Rendez-Vous
+            </button>
+            <button
+              type="button"
+              class="btn btn-info"
+              *ngIf="currentUser != null"
+              [routerLink]="['/reservations', user.id]"
+            >
+              Prendre un Rendez-Vous
+            </button>
+          </div>
+        </div>
+        <div class="card-body" *ngIf="user">
+          <form>
+            <h6 class="heading-small text-muted mb-4">
+              Informations personnelles
+            </h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-username"
+                      >Nom</label
+                    >
+                    <p>
+                      {{ user.nom }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-email"
+                      >Prenom</label
+                    >
+                    <p>
+                      {{ user.prenom }}
+                    </p>
+                    <!--card fin-->
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-email"
+                      >Specialité</label
+                    >
+                    <p>
+                      {{ user.specialite }}
+                    </p>
+                    <!--card fin-->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+            <!-- Address -->
+            <h6 class="heading-small text-muted mb-4">Contacts</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-city"
+                      >Email</label
+                    >
+                    <!-- Card stats -->
+
+                    <p>
+                      {{ user.email }}
+                    </p>
+
+                    <!--card fin-->
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-country"
+                      >Telephone</label
+                    >
+                    <!-- Card stats -->
+
+                    <p>
+                      {{ user.tel }}
+                    </p>
+
+                    <!--card fin-->
+                  </div>
+                </div>
+              </div>
+
+              <!--map end-->
+            </div>
+            <hr class="my-4" />
+            <!-- Address -->
+            <h6 class="heading-small text-muted mb-4">Informations cabinet</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-city"
+                      >Adresse</label
+                    >
+                    <!-- Card stats -->
+
+                    <p>
+                      {{ user.adresse }}
+                    </p>
+
+                    <!--card fin-->
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-country"
+                      >Prix visite</label
+                    >
+                    <!-- Card stats -->
+
+                    <p>{{ user.prixVisite }} Dinard</p>
+
+                    <!--card fin-->
+                  </div>
+                </div>
+              </div>
+              <hr class="my-4" />
+              <!-- Address -->
+              <h6 class="heading-small text-muted mb-4">Adresse sur carte</h6>
+              <!--map-->
+              <agm-map
+                [latitude]="tabVille[user.adresse].lat"
+                [longitude]="tabVille[user.adresse].lng"
+              >
+                <agm-marker
+                  [latitude]="tabVille[user.adresse].lat"
+                  [longitude]="tabVille[user.adresse].lng"
+                ></agm-marker>
+              </agm-map>
+
+              <!--map end-->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
